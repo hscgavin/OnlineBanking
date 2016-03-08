@@ -1,0 +1,55 @@
+﻿@model WDTAssignment2NWBA.Models.BPayModel
+
+@{
+    ViewBag.Title = "Schedule Bill Pay";
+}
+
+@using (Html.BeginForm("List","BPay"))
+{
+    <input type="submit" value="View BPay List" />
+}
+
+<h2>Schedule Bill Pay</h2>
+@using (Html.BeginForm())
+{
+     @Html.AntiForgeryToken()
+     @Html.ValidationSummary(true)
+
+     <fieldset>
+        <legend>Schedule Form</legend>
+        <ol>
+            <li>
+                @Html.Label("From Account: ")
+                @Html.DropDownListFor(m=>Model.BillPay.AccountNumber, Model.Accounts)
+            </li>
+             <li>
+                @Html.Label("To Payee: ")
+                @Html.DropDownListFor(m=>Model.BillPay.PayeeID, Model.Payees)
+
+            </li>
+            <li>
+                @Html.LabelFor(m=>m.BillPay.Amount)
+                @Html.TextBoxFor(m => m.BillPay.Amount)
+                @Html.ValidationMessageFor(m => m.BillPay.Amount)
+            </li>
+            <li>
+                @Html.LabelFor(m=>m.BillPay.ScheduleDate)
+                @Html.EditorFor(m => m.BillPay.ScheduleDate)
+                @Html.ValidationMessageFor(m => m.BillPay.ScheduleDate)
+
+            </li>
+             <li>
+                @Html.LabelFor(m=>m.BillPay.Period)
+                @Html.DropDownListFor(m => m.BillPay.Period,Model.Periods)
+                @Html.ValidationMessageFor(m => m.BillPay.Period)
+            </li>
+
+        </ol>
+         <p>
+        <input type="button" value="Cancel Transaction" onclick="window.location.href = '/BPay/list'" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Save Information" />
+        </p>
+   </fieldset>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

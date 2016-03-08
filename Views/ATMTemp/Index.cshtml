@@ -1,0 +1,33 @@
+﻿@model WDTAssignment2NWBA.Models.ATMTempModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<h2>Transaction Details</h2>
+
+<section id="loginForm">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Transaction</legend>
+            <ol>
+                <li>
+                    @Html.Label("Transaction Type")
+                    <select>
+                        <option value="D">Deposit Money</option>
+                        <option value="W">Withdrawal</option>
+                        <option value="T">Transfer</option>
+                    </select>
+                </li>
+                <li>
+                   
+                </li>
+                </ol>
+                </fieldset>
+    }
+        </section>

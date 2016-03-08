@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "About Us";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    @*<h2>@ViewBag.Message</h2>*@
+</hgroup>
+
+<article>
+    <p>
+        National Wealth Bank of Australia (NWBA) offers Internet banking solutions with over 5,000 customers 
+        and 1,000 people, operating more than 50 offices throughout Australia.
+    </p>
+    <p>
+        Our major financial services franchises in Australia are complemented by businesses in New Zealand and Australia. 
+        Each of our services is uniquely positioned, but built on a common commitment to provide our customers with quality 
+        products and services, fair fees and charges, and relationships built on the principles of help, guidance and advice.
+    </p>
+</article>
+
+<aside>
+    <h3>Quick navigation links.</h3>
+
+    <ul>
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink("About", "About", "Home")</li>
+        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+    </ul>
+</aside>

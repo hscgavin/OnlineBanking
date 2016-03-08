@@ -1,0 +1,58 @@
+﻿@using WDTAssignment2NWBA.HtmlHelpers
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - National Wealth Bank of Australia</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <table id="logo-table">
+                        <tr id="logo-row">
+                            <td class="logo-col">@Html.ImageLink("Index", "../../Images/nwba/nwba_logo.png", "NWBA Logo")</td>
+                            <td class="logo-col">@Html.ImageLink("Index", "../../Images/nwba/nwba_title.png", "NWBA Logo")</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="float-right">
+                    <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>
+                    <nav>
+                        <ul id="menu">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("About Us", "About", "Home")</li>
+                            <li>@Html.ActionLink("Deposit/Withdraw", "Index", "ATM")</li>
+                            <li>@Html.ActionLink("My Statement", "Index", "MyStatement")</li>
+                            <li>@Html.ActionLink("Bills Pay", "Index", "BPay")</li>
+                            <li>@Html.ActionLink("My Profile", "Index", "Profile")</li>
+                            <li>@Html.ActionLink("Contact Us", "Contact", "Home")</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - National Wealth Bank of Australia</p>
+                </div>
+            </div>
+        </footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

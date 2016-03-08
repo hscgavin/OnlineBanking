@@ -1,0 +1,69 @@
+﻿@model WDTAssignment2NWBA.Models.BPayModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>BillPay</legend>
+
+        @Html.HiddenFor(model => model.BillPay.BillPayID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BillPay.AccountNumber)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.BillPay.AccountNumber, Model.Accounts)
+            @Html.ValidationMessageFor(model => model.BillPay.AccountNumber)
+        </div>
+
+           <div class="editor-label">
+            @Html.LabelFor(model => model.BillPay.Payee)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.BillPay.PayeeID, Model.Payees)
+            @Html.ValidationMessageFor(model =>model.BillPay.PayeeID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BillPay.Amount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BillPay.Amount)
+            @Html.ValidationMessageFor(model =>model.BillPay.Amount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BillPay.ScheduleDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BillPay.ScheduleDate)
+            @Html.ValidationMessageFor(model => model.BillPay.ScheduleDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BillPay.Period)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.BillPay.Period,Model.Periods)
+            @Html.ValidationMessageFor(model => model.BillPay.Period)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,79 @@
+﻿@model WDTAssignment2NWBA.DataAccessLayer.BillPay
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<br />
+<fieldset>
+    <legend>BillPay</legend>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.Account.Customer.CustomerName)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Account.Customer.CustomerName)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.AccountNumber)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AccountNumber)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.Account.AccountType)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Account.AccountType)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.Payee.PayeeName)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Payee.PayeeName)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.Amount)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Amount)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.ScheduleDate)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ScheduleDate)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.StopDate)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StopDate)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.StoppedBy)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StoppedBy)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.ModifyDate)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModifyDate)
+    </div>
+
+</fieldset>
+<br />
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

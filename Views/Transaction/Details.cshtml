@@ -1,0 +1,73 @@
+﻿@model WDTAssignment2NWBA.DataAccessLayer.Transaction
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<br />
+<fieldset>
+    <legend>Transaction</legend>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.AccountNumber)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AccountNumber)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.Account.AccountType)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Account.AccountType)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.TransactionType1.TransactionType1)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TransactionType1.TransactionType1)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.TransactionType1.Description)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TransactionType1.Description)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.DestinationAccount)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DestinationAccount)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.Amount)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Amount)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.Comment)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Comment)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.ModifyDate)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModifyDate)
+    </div>
+
+</fieldset>
+
+<br />
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

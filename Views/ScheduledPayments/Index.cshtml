@@ -1,0 +1,101 @@
+﻿@model IEnumerable<WDTAssignment2NWBA.DataAccessLayer.BillPay>
+
+@{
+    ViewBag.Title = "Schedules";
+}
+
+<h2>Scheduled Payments</h2>
+<br />
+<p>
+    @*@using (Html.BeginForm()){    
+         <p>Customer Name: @Html.TextBox("SearchString")
+         <input type="submit" value="Search" /></p> 
+        }*@
+
+    @using (Html.BeginForm("Index","ScheduledPayments",FormMethod.Get)){     
+         <p>Customer Name: @Html.TextBox("searchStringCustName")   
+           @*Status: @Html.DropDownList("ScheduledStatus", "All")*@   
+         <input type="submit" value="Search" /></p> 
+        } 
+
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Account.AccountType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Payee.PayeeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScheduleDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Period)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifyDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StopDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StoppedBy)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account.AccountType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Payee.PayeeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScheduleDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Period)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifyDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StopDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StoppedBy)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.BillPayID }) |
+            @if (item.Status == "Y") {
+                <strong>@Html.ActionLink("Stop Schedule", "Edit", new { id=item.BillPayID })</strong>
+             }
+            else {
+                <strong>@Html.ActionLink("Enable Schedule", "Edit", new { id=item.BillPayID })</strong>
+            }                                                                               
+        </td>
+    </tr>
+}
+
+</table>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

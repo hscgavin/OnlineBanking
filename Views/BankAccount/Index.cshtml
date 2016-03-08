@@ -1,0 +1,80 @@
+﻿@model IEnumerable<WDTAssignment2NWBA.DataAccessLayer.Account>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Accounts</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+
+    @using (Html.BeginForm()){    
+         <p> Name: @Html.TextBox("SearchString")  
+         <input type="submit" value="Search" /></p> 
+        } 
+
+</p>
+<table class="nwbatables">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountNumber)
+            @*@Html.DisplayName("Number")*@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountType)
+            @*@Html.DisplayName("Type")*@
+        </th>
+        <th>
+            @Html.DisplayName("Description")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.CustomerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Balance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifyDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountType)
+        </td>
+        <td>
+            @if (item.AccountType == "S")
+            {
+                @Html.DisplayName("Savings")
+            }
+            else if (item.AccountType == "C")
+            {
+                @Html.DisplayName("Checking")
+            }
+            else
+            {
+                @Html.DisplayFor(modelItem => item.AccountType)
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Balance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifyDate)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.AccountNumber })
+        </td>
+    </tr>
+}
+
+</table>

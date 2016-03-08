@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3cae6a0f69394d179c6de5a17442672b" Name="Diagram1">
+        <EntityTypeShape EntityType="WDTAssignment2NWBAModel.Account" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDTAssignment2NWBAModel.BillPay" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDTAssignment2NWBAModel.Customer" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDTAssignment2NWBAModel.Login" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDTAssignment2NWBAModel.Payee" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDTAssignment2NWBAModel.Transaction" Width="1.75" PointX="5.25" PointY="8.25" IsExpanded="true" />
+        <AssociationConnector Association="WDTAssignment2NWBAModel.FK_Account_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="WDTAssignment2NWBAModel.FK_BillPay_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="WDTAssignment2NWBAModel.FK_Transaction_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="WDTAssignment2NWBAModel.FK_Transaction_Account1" ManuallyRouted="false" />
+        <AssociationConnector Association="WDTAssignment2NWBAModel.FK_BillPay_Payee" ManuallyRouted="false" />
+        <AssociationConnector Association="WDTAssignment2NWBAModel.FK_Login_Customer" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WDTAssignment2NWBAModel.TransactionCategory" Width="2.125" PointX="3.375" PointY="11.5" />
+        <EntityTypeShape EntityType="WDTAssignment2NWBAModel.TransactionType" Width="2" PointX="0.5" PointY="10.5" />
+        <AssociationConnector Association="WDTAssignment2NWBAModel.FK_Transaction_TransactionType" />
+        <AssociationConnector Association="WDTAssignment2NWBAModel.FK_TransactionType_TransactionCategory" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

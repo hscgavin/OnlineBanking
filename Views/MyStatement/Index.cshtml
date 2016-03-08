@@ -1,0 +1,22 @@
+﻿@*@model IEnumerable<WDTAssignment2NWBA.DataAccessLayer.Account>*@
+@model WDTAssignment2NWBA.Models.MyStatementModel
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title = "My statement";
+}
+
+<h2>My Statement</h2>
+
+<p>
+@*    @Html.ActionLink("Create New", "Create")*@
+
+    @using (Html.BeginForm()){    
+         <p> Select your account: @Html.DropDownList("accountType") 
+
+         <input type="submit" value="View" /></p> 
+        }
+</p>
+
+

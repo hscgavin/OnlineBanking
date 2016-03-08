@@ -1,0 +1,143 @@
+﻿@model WDTAssignment2NWBA.Models.MyStatementModel
+@using PagedList.Mvc; 
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title = "My statement";
+}
+
+<h2>My Statement</h2>
+
+<p>
+@*    @Html.ActionLink("Create New", "Create")*@
+
+    @using (Html.BeginForm()){    
+         <p> Select your account: @Html.DropDownList("accountType") 
+
+         <input type="submit" value="View" /></p> 
+        }
+</p>
+
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Accounts.First().AccountNumber) 
+        </th>
+        <th></th><th></th><th></th><th></th><th></th><th></th>
+        <th>
+            @Html.HiddenFor(model => model.Accounts.First().AccountType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Accounts.First().Balance)
+        </th>
+        <th>
+            @Html.HiddenFor(model => model.Accounts.First().CustomerID)
+        </th>
+        <th>
+            @Html.HiddenFor(model => model.Accounts.First().ModifyDate)
+        </th>
+     
+    </tr>
+
+@foreach (var item in Model.Accounts) {
+    <tr>
+        <td>
+            <strong>@Html.DisplayFor(modelItem => item.AccountNumber)</strong>
+        </td>
+        <td></td><td></td><td></td><td></td><td></td><td></td>
+        <td>
+            @Html.HiddenFor(modelItem => item.AccountType)
+        </td>
+        <td>
+           <strong>@Html.DisplayFor(modelItem => item.Balance)</strong>
+        </td>
+        <td>
+            @Html.HiddenFor(modelItem => item.CustomerID)
+        </td>
+        <td>
+            @Html.HiddenFor(modelItem => item.ModifyDate)
+        </td>
+@*        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>*@
+    </tr>
+}
+
+</table>
+
+
+
+<table>
+
+    <tr>
+        <th>
+@*            @Html.DisplayNameFor(modelItem => modelItem.Transactions.First().ModifyDate)*@
+            Date
+        </th>
+        <th>
+@*            @Html.HiddenFor(modelItem => modelItem.Transactions.First().TransactionID)*@
+        </th>
+        <th>
+            Transaction Details
+        </th>
+        <th>
+@*            @Html.HiddenFor(modelItem => modelItem.Transactions.First().TransactionType)*@
+        </th>
+        <th>
+@*            @Html.HiddenFor(modelItem => modelItem.Transactions.First().AccountNumber)*@
+        </th>
+        <th>
+@*            @Html.HiddenFor(modelItem => modelItem.Transactions.First().DestinationAccount)*@
+        </th>
+        <th>
+@*            @Html.DisplayNameFor(modelItem => modelItem.Transactions.First().Amount)*@
+            Amount
+        </th>
+        
+        
+
+    </tr>
+
+
+@foreach (var item in Model.Transactions) {
+    <tr>
+                <td>
+            @Html.DisplayFor(modelItem => item.ModifyDate)
+        </td>
+        <td>
+            @Html.HiddenFor(modelItem => item.TransactionID)
+        </td>
+        <td>
+             @Html.DisplayFor(modelItem=>item.Comment)
+        </td>
+        <td>
+            @Html.HiddenFor(modelItem => item.TransactionType)
+        </td>
+        <td>
+            @Html.HiddenFor(modelItem => item.AccountNumber)
+        </td>
+        <td>
+            @Html.HiddenFor(modelItem => item.DestinationAccount)
+        </td>
+        <td>   
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+
+@*        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>*@
+    </tr>
+}
+
+</table>
+
+
+Page @(Model.Transactions.PageCount < Model.Transactions.PageNumber ? 0 : Model.Transactions.PageNumber) of @Model.Transactions.PageCount
+
+@Html.PagedListPager( Model.Transactions, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter }) )

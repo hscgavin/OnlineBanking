@@ -1,0 +1,84 @@
+﻿@model IEnumerable<WDTAssignment2NWBA.DataAccessLayer.Customer>
+
+@{
+    ViewBag.Title = "User Profiles";
+}
+
+<h2>User Profiles</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Register", "Account")
+
+    @using (Html.BeginForm()){    
+         <p> Name: @Html.TextBox("SearchString")
+         <input type="submit" value="Search" /></p> 
+        }
+
+</p>
+<table>
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.CustomerName)*@
+            @Html.DisplayName("Name")
+            @*@Html.ActionLink("Customer Name", "Index", new { sortOrder = ViewBag.NameSortParm })*@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TFN)
+        </th>
+        <th>
+           @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.PostCode)*@
+            @Html.DisplayName("Post Code")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.ModifyDate)*@
+            @Html.DisplayName("Modified Date")
+            @*@Html.ActionLink("Modified Date", "Index", new { sortOrder = ViewBag.DateSortParm })*@
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TFN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.State)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifyDate)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.CustomerID }) |
+            @Html.ActionLink("Edit", "Edit", new { id=item.CustomerID })
+        </td>
+    </tr>
+}
+
+</table>

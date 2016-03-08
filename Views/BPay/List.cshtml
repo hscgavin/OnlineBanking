@@ -1,0 +1,59 @@
+﻿@model WDTAssignment2NWBA.Models.BPayModel
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Index")
+</p>
+<table>
+
+    <tr>
+        <th>
+            @Html.DisplayName("Actions")
+        </th>
+        <th>
+            @Html.DisplayNameFor(m=>m.BillPay.Payee)
+        </th>
+                <th>
+            @Html.DisplayNameFor(m=>m.BillPay.Amount)
+        </th>
+                <th>
+            @Html.DisplayNameFor(m=>m.BillPay.ScheduleDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m=>m.BillPay.Period)
+        </th>
+    </tr>
+
+@foreach (var item in Model.BillPays) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id=item.BillPayID })
+            @Html.ActionLink("Delete", "Delete", new {  id=item.BillPayID })
+        </td>
+
+        <td>
+            @Html.DisplayFor(m=>item.Payee.PayeeName)
+        </td>
+        <td>
+            @Html.DisplayFor(m=>item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(m=>item.ScheduleDate)
+        </td>
+         <td>
+            @Html.DisplayFor(m=>item.Period)
+        </td>
+
+    </tr>
+}
+
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,53 @@
+﻿@model ICollection<AuthenticationClientData>
+
+@if (Model.Count == 0)
+{
+    <div class="message-info">
+        <ol class="round">
+            <li class="one">
+                <h5>Login to NWBA Internet Banking</h5>
+                The login process verifies your identity using your NWBA User ID and Password. 
+                For this reason, you should keep your NWBA User ID and Password confidential to ensure 
+                the security of your NWBA Internet Banking transactions.
+            </li>
+
+            <li class="two">
+                <h5>How to login</h5>
+                1. Click Login at the top right hand corner of the NWBA homepage.<br />
+                2. On the Login page:<br />
+                   &nbsp;&nbsp;&nbsp;&nbsp;i) Enter your NWBA UserID<br />
+                   &nbsp;&nbsp;&nbsp;&nbsp;ii) Enter your NWBA Internet Banking password (Internet Banking passwords must be 6 characters or more).<br />
+                3. Click Login to access your NWBA Internet Banking information.</li>
+
+            <li class="three">
+                <h5>What to do if you forget your password</h5>
+                If you have forgotten your NWBA Internet Banking password, you will need to re-register. 
+                Your NWBA Internet Banking Password cannot be reset or reactivated, but can be changed by 
+                calling NWBA customer care.
+            </li>
+
+    <li class="four">
+        <h5>Password security</h5>
+        It is recommended that you change your password on a regular basis. 
+        This helps to ensure your NWBA Internet Banking transactions remain secure.
+    </li>
+
+</ol>
+    </div>
+}
+else
+{
+    using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }))
+    {
+    @Html.AntiForgeryToken()
+    <fieldset id="socialLoginList">
+        <legend>Log in using another service</legend>
+        <p>
+        @foreach (AuthenticationClientData p in Model)
+        {
+            <button type="submit" name="provider" value="@p.AuthenticationClient.ProviderName" title="Log in using your @p.DisplayName account">@p.DisplayName</button>
+        }
+        </p>
+    </fieldset>
+    }
+}

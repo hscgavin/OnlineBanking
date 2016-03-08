@@ -1,0 +1,128 @@
+﻿@model WDTAssignment2NWBA.DataAccessLayer.BillPay
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Stop or Enable Scheduled Payment</h2>
+
+@*<h4>Are you sure you want to 
+@if (Model.Status == "Y") {
+    <strong>Stop</strong>
+}
+else {
+    <strong>Enable</strong>
+}
+this schedule?</h4>*@
+<br />
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>BillPay</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BillPayID)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.BillPayID)
+            @Html.ValidationMessageFor(model => model.BillPayID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AccountNumber)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.AccountNumber)
+            @Html.ValidationMessageFor(model => model.AccountNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PayeeID)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.PayeeID)
+            @Html.ValidationMessageFor(model => model.PayeeID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Amount)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Amount)
+            @Html.ValidationMessageFor(model => model.Amount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ScheduleDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ScheduleDate)
+            @Html.ValidationMessageFor(model => model.ScheduleDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Period)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Period)
+            @Html.ValidationMessageFor(model => model.Period)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Status)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.Status, new List<SelectListItem>{new SelectListItem{Text = "Yes", Value = "Y"}, new SelectListItem{Text = "No", Value = "N"}})
+        </div>
+
+        <div class="editor-label">
+            @*@Html.LabelFor(model => model.StopDate)*@
+        </div>
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.StopDate)
+            @*@Html.ValidationMessageFor(model => model.StopDate)*@
+        </div>
+
+        <div class="editor-label">
+            @*@Html.LabelFor(model => model.StoppedBy)*@
+        </div>
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.StoppedBy)
+            @*@Html.ValidationMessageFor(model => model.StoppedBy)*@
+        </div>
+
+        <div class="editor-label">
+            @*@Html.LabelFor(model => model.ModifyDate)*@
+        </div>
+        <div class="editor-field">
+            @Html.HiddenFor(model => model.ModifyDate)
+            @*@Html.ValidationMessageFor(model => model.ModifyDate)*@
+        </div>
+
+        
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+        <script>
+            $('#BillPayID').attr('readonly', 'readonly');
+            $('#AccountNumber').attr('readonly', 'readonly');
+            $('#PayeeID').attr('readonly', 'readonly');
+            $('#Amount').attr('readonly', 'readonly');
+            //$('#ScheduleDate').attr('readonly', 'readonly');
+            $('#Period').attr('readonly', 'readonly');
+        </script>
+}

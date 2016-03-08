@@ -1,0 +1,81 @@
+﻿@model WDTAssignment2NWBA.Models.LoginModel
+
+@{
+    ViewBag.Title = "Welcome to the National Wealth Bank of Australia";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                @*<h2>@ViewBag.Message</h2>*@
+            </hgroup>
+            <p>
+                NWBA is Australia's premiere online banking solution.
+                NWBA'a online banking system is easy to use, convenient, and is safe and secure.
+            </p>
+        </div>
+    </section>
+}
+@if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("User"))
+{
+    <section id="loginForm">
+        @Html.Partial("_UserWelcomePartial")
+    </section>
+    
+    <section id="">
+        <img alt="image" src="../../Images/nwba/money.png" />
+    </section>
+ 
+}
+else if(Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Admin"))
+{
+    <section id="loginForm">
+        @Html.Partial("_AdminWelcomePartial")
+    </section>
+    
+    <section id="">
+        <img alt="image" src="../../Images/nwba/money.png" />
+    </section>
+}
+else
+{
+    <section id="loginForm">
+        <h3>Use your NWBA User ID and Password to log in.</h3>
+        <br />
+        <br />
+        @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <legend>Log in Form</legend>
+                <ol>
+                    <li>
+                        @Html.LabelFor(m => m.UserName)
+                        @Html.TextBoxFor(m => m.UserName)
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </li>
+                    <li>
+                        @Html.LabelFor(m => m.Password)
+                        @Html.PasswordFor(m => m.Password)
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </li>
+                    <li>
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                        @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+                    </li>
+                </ol>
+                <input type="submit" value="Log in" />
+            </fieldset>
+            <p>
+                @*@Html.ActionLink("Register", "Register") if you don't have an account.*@
+                @Html.ActionLink("Contact", "Contact", "Home") Customer Care if you don't have an account or you have forgotten your User ID and/or Password.
+            </p>
+        }
+    </section>
+
+
+    <img alt="image" src="../../Images/nwba/money.png" />
+}

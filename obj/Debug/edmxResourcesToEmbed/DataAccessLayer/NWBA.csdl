@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WDTAssignment2NWBAModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="WDTAssignment2NWBAEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="WDTAssignment2NWBAModel.Account" />
+    <EntitySet Name="BillPays" EntityType="WDTAssignment2NWBAModel.BillPay" />
+    <EntitySet Name="Customers" EntityType="WDTAssignment2NWBAModel.Customer" />
+    <EntitySet Name="Logins" EntityType="WDTAssignment2NWBAModel.Login" />
+    <EntitySet Name="Payees" EntityType="WDTAssignment2NWBAModel.Payee" />
+    <EntitySet Name="Transactions" EntityType="WDTAssignment2NWBAModel.Transaction" />
+    <AssociationSet Name="FK_Account_Customer" Association="WDTAssignment2NWBAModel.FK_Account_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BillPay_Account" Association="WDTAssignment2NWBAModel.FK_BillPay_Account">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="BillPay" EntitySet="BillPays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transaction_Account" Association="WDTAssignment2NWBAModel.FK_Transaction_Account">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Transaction" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transaction_Account1" Association="WDTAssignment2NWBAModel.FK_Transaction_Account1">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Transaction" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BillPay_Payee" Association="WDTAssignment2NWBAModel.FK_BillPay_Payee">
+      <End Role="Payee" EntitySet="Payees" />
+      <End Role="BillPay" EntitySet="BillPays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Login_Customer" Association="WDTAssignment2NWBAModel.FK_Login_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Login" EntitySet="Logins" />
+    </AssociationSet>
+    <EntitySet Name="TransactionCategories" EntityType="WDTAssignment2NWBAModel.TransactionCategory" />
+    <EntitySet Name="TransactionTypes" EntityType="WDTAssignment2NWBAModel.TransactionType" />
+    <AssociationSet Name="FK_Transaction_TransactionType" Association="WDTAssignment2NWBAModel.FK_Transaction_TransactionType">
+      <End Role="TransactionType" EntitySet="TransactionTypes" />
+      <End Role="Transaction" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransactionType_TransactionCategory" Association="WDTAssignment2NWBAModel.FK_TransactionType_TransactionCategory">
+      <End Role="TransactionCategory" EntitySet="TransactionCategories" />
+      <End Role="TransactionType" EntitySet="TransactionTypes" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="AccountNumber" />
+    </Key>
+    <Property Name="AccountNumber" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="AccountType" Type="String" Nullable="false" MaxLength="1" Unicode="true" FixedLength="false" />
+    <Property Name="Balance" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Customer" Relationship="WDTAssignment2NWBAModel.FK_Account_Customer" FromRole="Account" ToRole="Customer" />
+    <NavigationProperty Name="BillPays" Relationship="WDTAssignment2NWBAModel.FK_BillPay_Account" FromRole="Account" ToRole="BillPay" />
+    <NavigationProperty Name="Transactions" Relationship="WDTAssignment2NWBAModel.FK_Transaction_Account" FromRole="Account" ToRole="Transaction" />
+    <NavigationProperty Name="Transactions1" Relationship="WDTAssignment2NWBAModel.FK_Transaction_Account1" FromRole="Account" ToRole="Transaction" />
+  </EntityType>
+  <EntityType Name="BillPay">
+    <Key>
+      <PropertyRef Name="BillPayID" />
+    </Key>
+    <Property Name="BillPayID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="AccountNumber" Type="Int32" Nullable="false" />
+    <Property Name="PayeeID" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="ScheduleDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Period" Type="String" Nullable="false" MaxLength="1" Unicode="true" FixedLength="false" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Account" Relationship="WDTAssignment2NWBAModel.FK_BillPay_Account" FromRole="BillPay" ToRole="Account" />
+    <NavigationProperty Name="Payee" Relationship="WDTAssignment2NWBAModel.FK_BillPay_Payee" FromRole="BillPay" ToRole="Payee" />
+    <Property Type="String" Name="Status" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="StopDate" Precision="3" />
+    <Property Type="String" Name="StoppedBy" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="TFN" Type="String" MaxLength="11" Unicode="true" FixedLength="false" />
+    <Property Name="Address" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="City" Type="String" MaxLength="40" Unicode="true" FixedLength="false" />
+    <Property Name="State" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="PostCode" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="15" Unicode="true" FixedLength="false" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Accounts" Relationship="WDTAssignment2NWBAModel.FK_Account_Customer" FromRole="Customer" ToRole="Account" />
+    <NavigationProperty Name="Logins" Relationship="WDTAssignment2NWBAModel.FK_Login_Customer" FromRole="Customer" ToRole="Login" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Customer" Relationship="WDTAssignment2NWBAModel.FK_Login_Customer" FromRole="Login" ToRole="Customer" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Payee">
+    <Key>
+      <PropertyRef Name="PayeeID" />
+    </Key>
+    <Property Name="PayeeID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="PayeeName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Address" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="City" Type="String" MaxLength="40" Unicode="true" FixedLength="false" />
+    <Property Name="State" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="PostCode" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="15" Unicode="true" FixedLength="false" />
+    <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="BillPays" Relationship="WDTAssignment2NWBAModel.FK_BillPay_Payee" FromRole="Payee" ToRole="BillPay" />
+  </EntityType>
+  <EntityType Name="Transaction">
+    <Key>
+      <PropertyRef Name="TransactionID" />
+    </Key>
+    <Property Name="TransactionID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="AccountNumber" Type="Int32" Nullable="false" />
+    <Property Name="DestinationAccount" Type="Int32" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Comment" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Account" Relationship="WDTAssignment2NWBAModel.FK_Transaction_Account" FromRole="Transaction" ToRole="Account" />
+    <NavigationProperty Name="Account1" Relationship="WDTAssignment2NWBAModel.FK_Transaction_Account1" FromRole="Transaction" ToRole="Account" />
+    <Property Type="Int32" Name="TransactionTypeID" Nullable="false" />
+    <NavigationProperty Name="TransactionType1" Relationship="WDTAssignment2NWBAModel.FK_Transaction_TransactionType" FromRole="Transaction" ToRole="TransactionType" />
+    <Property Type="String" Name="TransactionType" MaxLength="1" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Account_Customer">
+    <End Role="Customer" Type="WDTAssignment2NWBAModel.Customer" Multiplicity="1" />
+    <End Role="Account" Type="WDTAssignment2NWBAModel.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BillPay_Account">
+    <End Role="Account" Type="WDTAssignment2NWBAModel.Account" Multiplicity="1" />
+    <End Role="BillPay" Type="WDTAssignment2NWBAModel.BillPay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccountNumber" />
+      </Principal>
+      <Dependent Role="BillPay">
+        <PropertyRef Name="AccountNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transaction_Account">
+    <End Role="Account" Type="WDTAssignment2NWBAModel.Account" Multiplicity="1" />
+    <End Role="Transaction" Type="WDTAssignment2NWBAModel.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccountNumber" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="AccountNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transaction_Account1">
+    <End Role="Account" Type="WDTAssignment2NWBAModel.Account" Multiplicity="0..1" />
+    <End Role="Transaction" Type="WDTAssignment2NWBAModel.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccountNumber" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="DestinationAccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BillPay_Payee">
+    <End Role="Payee" Type="WDTAssignment2NWBAModel.Payee" Multiplicity="1" />
+    <End Role="BillPay" Type="WDTAssignment2NWBAModel.BillPay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payee">
+        <PropertyRef Name="PayeeID" />
+      </Principal>
+      <Dependent Role="BillPay">
+        <PropertyRef Name="PayeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Login_Customer">
+    <End Role="Customer" Type="WDTAssignment2NWBAModel.Customer" Multiplicity="1" />
+    <End Role="Login" Type="WDTAssignment2NWBAModel.Login" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Login">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TransactionCategory">
+    <Key>
+      <PropertyRef Name="TransactionCategoryID" />
+    </Key>
+    <Property Type="Int32" Name="TransactionCategoryID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="TransactionCategory1" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Description" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="ModifyDate" Precision="3" />
+    <NavigationProperty Name="TransactionTypes" Relationship="WDTAssignment2NWBAModel.FK_TransactionType_TransactionCategory" FromRole="TransactionCategory" ToRole="TransactionType" />
+  </EntityType>
+  <EntityType Name="TransactionType">
+    <Key>
+      <PropertyRef Name="TransactionTypeID" />
+    </Key>
+    <Property Type="Int32" Name="TransactionTypeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="TransactionCategoryID" Nullable="false" />
+    <Property Type="String" Name="TransactionType1" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="DebitCredit" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Description" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="ModifyDate" Precision="3" />
+    <NavigationProperty Name="Transactions" Relationship="WDTAssignment2NWBAModel.FK_Transaction_TransactionType" FromRole="TransactionType" ToRole="Transaction" />
+    <NavigationProperty Name="TransactionCategory" Relationship="WDTAssignment2NWBAModel.FK_TransactionType_TransactionCategory" FromRole="TransactionType" ToRole="TransactionCategory" />
+  </EntityType>
+  <Association Name="FK_Transaction_TransactionType">
+    <End Type="WDTAssignment2NWBAModel.TransactionType" Role="TransactionType" Multiplicity="1" />
+    <End Type="WDTAssignment2NWBAModel.Transaction" Role="Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionType">
+        <PropertyRef Name="TransactionTypeID" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="TransactionTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransactionType_TransactionCategory">
+    <End Type="WDTAssignment2NWBAModel.TransactionCategory" Role="TransactionCategory" Multiplicity="1" />
+    <End Type="WDTAssignment2NWBAModel.TransactionType" Role="TransactionType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionCategory">
+        <PropertyRef Name="TransactionCategoryID" />
+      </Principal>
+      <Dependent Role="TransactionType">
+        <PropertyRef Name="TransactionCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

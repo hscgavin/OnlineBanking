@@ -1,0 +1,85 @@
+﻿@model IEnumerable<WDTAssignment2NWBA.DataAccessLayer.Transaction>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Transatcions</h2>
+<br />
+<p>
+    @using (Html.BeginForm("Index","Transaction", FormMethod.Get)){    
+         <p> Name: @Html.TextBox("SearchStringCustName")
+             @*Account Type: @Html.DropDownList("acctType", "All")*@
+
+         <input type="submit" value="Search" /></p> 
+        }
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayName("Name")
+        </th>
+        <th>
+            @Html.DisplayName("Account Number")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Account.AccountType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TransactionType1.TransactionType1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifyDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account.Customer.CustomerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account.AccountType) - 
+            @if (item.Account.AccountType == "S")
+            {
+                @Html.DisplayName("Savings")
+            }
+            else if (item.Account.AccountType == "C")
+            {
+                @Html.DisplayName("Checking")
+            }
+            else
+            {
+                @Html.DisplayFor(modelItem => item.Account.AccountType)
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TransactionType1.TransactionType1) - 
+            @Html.DisplayFor(modelItem => item.TransactionType1.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifyDate)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.TransactionID })
+        </td>
+    </tr>
+}
+
+</table>

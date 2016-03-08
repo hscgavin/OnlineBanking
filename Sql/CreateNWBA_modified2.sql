@@ -1,0 +1,238 @@
+﻿/****** Object:  Database [WDTAssignment2NWBA]    Script Date: 8/09/2013 8:58:23 PM ******/
+--CREATE DATABASE [WDTAssignment2NWBA]
+-- CONTAINMENT = NONE
+-- ON  PRIMARY 
+--( NAME = N'WDTAssignment2NWBA', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\WDTAssignment2NWBA.mdf' , SIZE = 5120KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+-- LOG ON 
+--( NAME = N'WDTAssignment2NWBA_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\WDTAssignment2NWBA_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET COMPATIBILITY_LEVEL = 110
+--GO
+--USE [WDTAssignment2NWBA]
+--GO
+--IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+--begin
+--EXEC [WDTAssignment2NWBA].[dbo].[sp_fulltext_database] @action = 'enable'
+--end
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET ANSI_NULL_DEFAULT OFF 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET ANSI_NULLS OFF 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET ANSI_PADDING OFF 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET ANSI_WARNINGS OFF 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET ARITHABORT OFF 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET AUTO_CLOSE OFF 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET AUTO_CREATE_STATISTICS ON 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET AUTO_SHRINK OFF 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET AUTO_UPDATE_STATISTICS ON 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET CURSOR_CLOSE_ON_COMMIT OFF 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET CURSOR_DEFAULT  GLOBAL 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET CONCAT_NULL_YIELDS_NULL OFF 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET NUMERIC_ROUNDABORT OFF 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET QUOTED_IDENTIFIER OFF 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET RECURSIVE_TRIGGERS OFF 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET  DISABLE_BROKER 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET DATE_CORRELATION_OPTIMIZATION OFF 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET TRUSTWORTHY OFF 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET PARAMETERIZATION SIMPLE 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET READ_COMMITTED_SNAPSHOT OFF 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET HONOR_BROKER_PRIORITY OFF 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET RECOVERY FULL 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET  MULTI_USER 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET PAGE_VERIFY CHECKSUM  
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET DB_CHAINING OFF 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+--GO
+--ALTER DATABASE [WDTAssignment2NWBA] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+--GO
+--EXEC sys.sp_db_vardecimal_storage_format N'WDTAssignment2NWBA', N'ON'
+--GO
+USE [WDTAssignment2NWBA]
+GO
+/****** Object:  Table [dbo].[Account]    Script Date: 8/09/2013 8:58:23 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Account](
+	[AccountNumber] [int] IDENTITY(1,1) NOT NULL,
+	[AccountType] [nvarchar](1) NOT NULL,
+	[Balance] [decimal](18, 0) NOT NULL,
+	[CustomerID] [int] NOT NULL,
+	[ModifyDate] [datetime] NOT NULL,
+ CONSTRAINT [PK_Account] PRIMARY KEY CLUSTERED 
+(
+	[AccountNumber] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[BillPay]    Script Date: 8/09/2013 8:58:23 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BillPay](
+	[BillPayID] [int] IDENTITY(1,1) NOT NULL,
+	[AccountNumber] [int] NOT NULL,
+	[PayeeID] [int] NOT NULL,
+	[Amount] [decimal](18, 0) NOT NULL,
+	[ScheduleDate] [datetime] NOT NULL,
+	[Period] [nvarchar](1) NOT NULL,
+	[Status] [nvarchar](1) NULL,
+	[StopDate] [datetime] NULL,
+	[StoppedBy] [nvarchar](50) NULL,
+	[ModifyDate] [datetime] NOT NULL,
+ CONSTRAINT [PK_BillPay] PRIMARY KEY CLUSTERED 
+(
+	[BillPayID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Customer]    Script Date: 8/09/2013 8:58:23 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Customer](
+	[CustomerID] [int] NOT NULL,
+	[CustomerName] [nvarchar](50) NOT NULL,
+	[TFN] [nvarchar](11) NULL,
+	[Address] [nvarchar](50) NULL,
+	[City] [nvarchar](40) NULL,
+	[State] [nvarchar](20) NULL,
+	[PostCode] [nvarchar](10) NULL,
+	[Phone] [nvarchar](15) NOT NULL,
+	[ModifyDate] [datetime] NOT NULL,
+ CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED 
+(
+	[CustomerID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [IX_Customer] UNIQUE NONCLUSTERED 
+(
+	[TFN] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Login]    Script Date: 8/09/2013 8:58:23 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Login](
+	[CustomerID] [int] NOT NULL,
+	[UserID] [int] NOT NULL,
+	[UserName] [nvarchar](50) NOT NULL,
+	[ModifyDate] [datetime] NOT NULL,
+ CONSTRAINT [PK_Login] PRIMARY KEY CLUSTERED 
+(
+	[UserID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Payee]    Script Date: 8/09/2013 8:58:23 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Payee](
+	[PayeeID] [int] IDENTITY(1,1) NOT NULL,
+	[PayeeName] [nvarchar](50) NOT NULL,
+	[Address] [nvarchar](50) NULL,
+	[City] [nvarchar](40) NULL,
+	[State] [nvarchar](20) NULL,
+	[PostCode] [nvarchar](10) NULL,
+	[Phone] [nvarchar](15) NOT NULL,
+	[ModifyDate] [datetime] NOT NULL,
+ CONSTRAINT [PK_Payee] PRIMARY KEY CLUSTERED 
+(
+	[PayeeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Transaction]    Script Date: 8/09/2013 8:58:23 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Transaction](
+	[TransactionID] [int] IDENTITY(1,1) NOT NULL,
+	[TransactionType] [nvarchar](1) NOT NULL,
+	[AccountNumber] [int] NOT NULL,
+	[DestinationAccount] [int] NULL,
+	[Amount] [decimal](18, 0) NOT NULL,
+	[Comment] [nvarchar](255) NULL,
+	[ModifyDate] [datetime] NULL,
+ CONSTRAINT [PK_Transaction] PRIMARY KEY CLUSTERED 
+(
+	[TransactionID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+ALTER TABLE [dbo].[Account]  WITH CHECK ADD  CONSTRAINT [FK_Account_Customer] FOREIGN KEY([CustomerID])
+REFERENCES [dbo].[Customer] ([CustomerID])
+GO
+ALTER TABLE [dbo].[Account] CHECK CONSTRAINT [FK_Account_Customer]
+GO
+ALTER TABLE [dbo].[BillPay]  WITH CHECK ADD  CONSTRAINT [FK_BillPay_Account] FOREIGN KEY([AccountNumber])
+REFERENCES [dbo].[Account] ([AccountNumber])
+GO
+ALTER TABLE [dbo].[BillPay] CHECK CONSTRAINT [FK_BillPay_Account]
+GO
+ALTER TABLE [dbo].[BillPay]  WITH CHECK ADD  CONSTRAINT [FK_BillPay_Payee] FOREIGN KEY([PayeeID])
+REFERENCES [dbo].[Payee] ([PayeeID])
+GO
+ALTER TABLE [dbo].[BillPay] CHECK CONSTRAINT [FK_BillPay_Payee]
+GO
+ALTER TABLE [dbo].[Login]  WITH CHECK ADD  CONSTRAINT [FK_Login_Customer] FOREIGN KEY([CustomerID])
+REFERENCES [dbo].[Customer] ([CustomerID])
+GO
+ALTER TABLE [dbo].[Login] CHECK CONSTRAINT [FK_Login_Customer]
+GO
+ALTER TABLE [dbo].[Transaction]  WITH CHECK ADD  CONSTRAINT [FK_Transaction_Account] FOREIGN KEY([AccountNumber])
+REFERENCES [dbo].[Account] ([AccountNumber])
+GO
+ALTER TABLE [dbo].[Transaction] CHECK CONSTRAINT [FK_Transaction_Account]
+GO
+ALTER TABLE [dbo].[Transaction]  WITH CHECK ADD  CONSTRAINT [FK_Transaction_Account1] FOREIGN KEY([DestinationAccount])
+REFERENCES [dbo].[Account] ([AccountNumber])
+GO
+ALTER TABLE [dbo].[Transaction] CHECK CONSTRAINT [FK_Transaction_Account1]
+GO
+USE [master]
+GO
+ALTER DATABASE [WDTAssignment2NWBA] SET  READ_WRITE 
+GO

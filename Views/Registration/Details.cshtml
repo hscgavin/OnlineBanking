@@ -1,0 +1,71 @@
+﻿@model WDTAssignment2NWBA.DataAccessLayer.Customer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<br />
+<fieldset>
+    <legend>Customer</legend>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.CustomerName)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CustomerName)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.TFN)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TFN)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.Address)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Address)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.City)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.City)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.State)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.State)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.PostCode)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PostCode)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.Phone)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Phone)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.ModifyDate)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModifyDate)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.CustomerID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

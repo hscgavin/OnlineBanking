@@ -1,0 +1,78 @@
+﻿@*@model WDTAssignment2NWBA.DataAccessLayer.Customer*@
+@model WDTAssignment2NWBA.Models.CustomerModel
+
+@{
+    ViewBag.Title = "Manage My Profile";
+}
+
+<h2>Manage Your Profile</h2>
+ @Html.ActionLink("Edit", "Edit") |
+ @Html.ActionLink("Details", "Details") |
+ @Html.ActionLink("Change Password", "Manage", "Account")
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table >
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.CustomerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.TFN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.PostCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.ModifyDate)
+        </th>
+    </tr>
+
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Customer.CustomerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Customer.TFN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Customer.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Customer.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Customer.State)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Customer.PostCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Customer.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Customer.ModifyDate)
+        </td>
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CustomerID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CustomerID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CustomerID })
+        </td>*@
+    </tr>
+
+
+</table>

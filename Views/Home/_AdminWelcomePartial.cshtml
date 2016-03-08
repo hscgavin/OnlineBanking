@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Welcome to the National Wealth Bank of Australia";
+}
+
+<h2>Welcome, @HttpContext.Current.User.Identity.Name</h2>
+<strong>You can do the following,</strong>
+
+    <ol class="round">
+        <li class="one">
+            <h5>Account Details</h5>
+            View a list of all the account details for a particular user. You can also add new accounts for that user.
+        </li>
+
+        <li class="two">
+            <h5>Transaction Details</h5>
+            View a list of all the transaction details for a particular user.
+        </li>
+
+        <li class="three">
+            <h5>Manage User Profile</h5>
+            View profile for all NWBA users and modify user profile information.
+        </li>
+
+    <li class="four">
+        <h5>Scheduled Payments</h5>
+        View a list of all scheduled payments, and stop scheduled payments.
+    </li>
+
+</ol>

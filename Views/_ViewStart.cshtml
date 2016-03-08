@@ -1,0 +1,16 @@
+﻿@*@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}*@
+
+@if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("User" )) {
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+else if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Admin")) {
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+else {
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+

@@ -1,0 +1,102 @@
+﻿@model WDTAssignment2NWBA.DataAccessLayer.BillPay
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>BillPay</legend>
+
+        @Html.HiddenFor(model => model.BillPayID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AccountNumber, "Account")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("AccountNumber", String.Empty)
+            @Html.ValidationMessageFor(model => model.AccountNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PayeeID, "Payee")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("PayeeID", String.Empty)
+            @Html.ValidationMessageFor(model => model.PayeeID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Amount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Amount)
+            @Html.ValidationMessageFor(model => model.Amount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ScheduleDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ScheduleDate)
+            @Html.ValidationMessageFor(model => model.ScheduleDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Period)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Period)
+            @Html.ValidationMessageFor(model => model.Period)
+        </div>
+
+@*        <div class="editor-label">
+            @Html.LabelFor(model => model.ModifyDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ModifyDate)
+            @Html.ValidationMessageFor(model => model.ModifyDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Status)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StopDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StopDate)
+            @Html.ValidationMessageFor(model => model.StopDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StoppedBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StoppedBy)
+            @Html.ValidationMessageFor(model => model.StoppedBy)
+        </div>*@
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

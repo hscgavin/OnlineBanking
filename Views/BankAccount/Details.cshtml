@@ -1,0 +1,51 @@
+﻿@model WDTAssignment2NWBA.DataAccessLayer.Account
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<br />
+<fieldset>
+    <legend>Account</legend>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.AccountNumber)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AccountNumber)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.AccountType)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AccountType)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.Customer.CustomerName)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Customer.CustomerName)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.Balance)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Balance)
+    </div>
+
+    <div class="display-label">
+         <strong>@Html.DisplayNameFor(model => model.ModifyDate)</strong>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModifyDate)
+    </div>
+
+</fieldset>
+<br />
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

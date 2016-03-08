@@ -1,0 +1,54 @@
+﻿@model WDTAssignment2NWBA.DataAccessLayer.Account
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Open a New Account.</h2>
+<br />
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Account</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CustomerID, "Customer")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("CustomerID", String.Empty)
+            @Html.ValidationMessageFor(model => model.CustomerID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AccountType)
+        </div>
+        <div class="editor-field">
+            @*@Html.EditorFor(model => model.AccountType)*@
+            @*@Html.DropDownList("AccountType", String.Empty)*@
+            @Html.DropDownListFor(model => model.AccountType, new List<SelectListItem>{new SelectListItem{Text = "Savings", Value = "S"}, new SelectListItem{Text = "Checking", Value = "C"}})
+            @Html.ValidationMessageFor(model => model.AccountType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Balance, "Opening Balance")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Balance)
+            @Html.ValidationMessageFor(model => model.Balance)
+        </div>
+
+        <p>
+            <input type="submit" value="Create New Account" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

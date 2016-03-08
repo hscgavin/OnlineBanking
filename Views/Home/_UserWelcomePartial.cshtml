@@ -1,0 +1,35 @@
+﻿@model WDTAssignment2NWBA.Models.LoginModel
+@{
+    ViewBag.Title = "Welcome to the National Wealth Bank of Australia";
+}
+
+<h2>Welcome, @HttpContext.Current.User.Identity.Name</h2>
+<strong>You can do the following,</strong>
+
+    <ol class="round">
+        <li class="one">
+            <h5>Deposit/Withdraw</h5>
+            From the Deposit/Withdraw page, you can perform transactions such as deposit, withdraw and transfer to another account.
+        </li>
+
+        <li class="two">
+            <h5>View Your Statement</h5>
+            My Statement page allows you to see the current balance of your specific account and get a listing of all the transactions. 
+            Choose the account type (Checking or Savings) from the drop-down box. Upon the selection of the type of account, 
+            the transactions will be displayed in a paged control (only 4 transactions per page).
+        </li>
+
+        <li class="three">
+            <h5>Schedule Bills Payments</h5>
+            The Bills Pay page is where bill pays can be scheduled.
+        </li>
+
+    <li class="four">
+        <h5>Manage Your Profile</h5>
+        My Profile page can be used to modify your profile information (such as Name, Address, City, State, Post Code, Phone and TFN).
+        It also allows you to change your password.
+    </li>
+
+</ol>
+
+

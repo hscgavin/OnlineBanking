@@ -1,0 +1,133 @@
+﻿@model WDTAssignment2NWBA.DataAccessLayer.Transaction
+
+@{
+    ViewBag.Title = "ATM";
+}
+
+<h2>Transaction Details</h2>
+<p class="message-success">@ViewBag.StatusMessage</p>
+<br />
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Transaction</legend>
+        <!-- TRANSACTION TYPE: DROP DOWN BOX -->
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TransactionTypeID, "Transaction Type", "TransactionType")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("TransactionTypeID", String.Empty)
+            @Html.ValidationMessageFor(model => model.TransactionTypeID)
+        </div>
+        <!-- TRANSACTION TYPE: DROP DOWN BOX (END)-->
+        <!-- DUMMY LABLE FOR: TO ACCOUNT -->
+        <div class="editor-label" id="directAccount" >
+            @Html.LabelFor(model => model.AccountNumber, "To Account", "Account1")
+        </div>
+        <!-- DUMMY LABEL FOR: TO ACCOUNT (END)-->
+        <!-- FROM ACCOUNT: DROP DOWN BOX -->
+        <div class="editor-label" id="fromAccount" >
+            @Html.LabelFor(model => model.AccountNumber, "From Account", "Account")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("AccountNumber", String.Empty)
+            @Html.ValidationMessageFor(model => model.AccountNumber)
+        </div>
+        <!-- FROM ACCOUNT: DROP DOWN BOX (END)-->
+        <!-- TO ACCOUNT: DROP DOWN BOX -->
+        <div class="editor-label" id="toAccount">
+            @Html.LabelFor(model => model.DestinationAccount, "To Account", "Account1")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("DestinationAccount", String.Empty)
+            @Html.ValidationMessageFor(model => model.DestinationAccount)
+        </div>
+        <!-- TO ACCOUNT: DROP DOWN BOX (END)-->
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Amount, "Amount")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Amount)
+            @Html.ValidationMessageFor(model => model.Amount)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Comment, "Comment")
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Comment)
+            @Html.ValidationMessageFor(model => model.Comment)
+        </div>
+
+        <p>
+            <input type="button" value="Cancel Transaction" onclick="window.location.href = '/Home'" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Execute Transaction" />
+        </p>
+    </fieldset>
+}
+
+@section Scripts {
+    
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#directAccount').hide();
+            // SWITCHING TO ACCOUNT && FROM ACCOUNT ON AND OFF DEPENDING ON CHOICES
+            $('#TransactionTypeID').change(function () {
+                //IF DEPOSIT OPTION IS SELECTED
+                //TURN DUMMY LABEL ON AND TURN EVERY OTHER LABELS OFF
+                //ACCOUNT NUMBER DROPDOWNBOX WILL BE USED AS DESTINATION ACCOUNT NUMBER
+                if ($('#TransactionTypeID option:selected').text() == "Deposit" || $('#TransactionTypeID option:selected').text() == "(1) D - Deposit") {
+                    $('#DestinationAccount').hide().find('option:selected').removeAttr('selected');
+                    $('#toAccount').hide();
+                    $('#directAccount').show();
+                    $('#AccountNumber').show().find('option:selected').removeAttr('selected');
+                    $('#fromAccount').hide();
+                }
+                    // IF WITHDRAW OPTION IS SELECTED
+                else if ($('#TransactionTypeID option:selected').text() == "Withdraw" || $('#TransactionTypeID option:selected').text() == "(2) W - Withdraw") 
+                {
+                    $('#directAccount').hide();
+                    $('#fromAccount').show();
+                    $('#AccountNumber').show().find('option:selected').removeAttr('selected');
+                    $('#DestinationAccount').hide().find('option:selected').removeAttr('selected');
+                    $('#toAccount').hide();
+                }
+                else //BY DEFAULT (IF TRANSFER OPTION IS SELECTED)
+                {
+                    $('#directAccount').hide();
+                    $('#DestinationAccount').show().find('option:selected').removeAttr('selected');
+                    $('#AccountNumber').show().find('option:selected').removeAttr('selected');
+                    $('#toAccount').show();
+                    $('#fromAccount').show();
+                }
+            });
+
+            // ACCOUNT SELECTION ASSISTANT
+            /*
+            $('#DestinationAccount').change(function () {
+                if ($('#TransactionTypeID option:selected').text() == "Deposit" && '#DestinationAccount option:selected')
+                {
+                    ($('#AccountNumber option:selected').text() = '#DestinationAccount option:selected'.text());
+                }
+            });
+            */
+
+
+            $('#AccountNumber').change(function () {
+                var text = $(this).val();
+                console.log(text);
+                $('#DestinationAccount option').each(function () {
+                    $(this).removeAttr('disabled');
+                    if ($(this).val() == text) {
+                        $(this).attr('disabled', 'disabled');
+                        $(this).removeAttr('selected');
+                    }
+
+                });
+            });
+        });
+      </script>
+}
+
+

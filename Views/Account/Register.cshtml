@@ -1,0 +1,71 @@
+﻿@model WDTAssignment2NWBA.Models.RegisterModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>Create a new account.</h2>
+</hgroup>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Registration Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.ConfirmPassword)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.CustomerName)
+                @Html.TextBoxFor(m => m.CustomerName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.TFN)
+                @Html.TextBoxFor(m => m.TFN)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Address)
+                @Html.TextBoxFor(m => m.Address)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.City)
+                @Html.TextBoxFor(m => m.City)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.State)
+                @Html.DropDownListFor(m => m.State,new List<SelectListItem> { new SelectListItem { Text = "VIC", Value = "VIC" }, new SelectListItem { Text = "SA", Value = "SA" }, new SelectListItem { Text = "NT", Value = "NT" }, new SelectListItem { Text = "ACT", Value = "ACT" },new SelectListItem { Text = "NSW", Value = "NSW" },new SelectListItem { Text = "QLD", Value = "QLD" },new SelectListItem { Text = "WA", Value = "WAS" },new SelectListItem { Text = "TAS", Value = "TAS" } })
+               @* @Html.DropDownList("State")*@
+            </li>
+            <li>
+                @Html.LabelFor(m => m.PostCode)
+                @Html.TextBoxFor(m => m.PostCode)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Phone)
+                @Html.TextBoxFor(m => m.Phone)
+            </li>
+        </ol>
+        <input type="submit" value="Register" />
+    </fieldset>
+}
+
+<div>
+    <br />
+    @Html.ActionLink("Back to List", "Index", "Registration")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

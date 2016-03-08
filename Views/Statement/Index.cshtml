@@ -1,0 +1,62 @@
+﻿@model WDTAssignment2NWBA.Models.StatementModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>View Statement</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.Label("Select your Account")
+    <fieldset>
+        <legend>Statement</legend>
+        <select>
+
+            @foreach (var a in Model.Accounts)
+            {
+                string type;
+                if (a.AccountType.ToUpper() == "S")
+                {
+                    type = a.AccountNumber + " (Saving)";
+                }
+                else
+                {
+                    type = a.AccountNumber + " (Checking)";
+                }
+            
+                <option value="@a.AccountNumber">@type</option>
+          
+            }
+        </select>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+
+    <table>
+        @if(ViewBag.isPost==true)
+        {
+        if (Model.Transactions != null)
+        {
+            foreach (var t in Model.Transactions)
+            {
+            <tr>
+                <td>
+                    @t.TransactionType
+                </td>
+                <td>
+                    @t.ModifyDate
+                </td>
+
+            </tr>
+            }
+        }
+        }
+    </table>
+}
+
